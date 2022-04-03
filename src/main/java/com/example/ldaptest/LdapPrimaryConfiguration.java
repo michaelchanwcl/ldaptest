@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.core.support.LdapContextSource;
 
+import javax.naming.Context;
 import java.util.Collections;
 
 @Configuration
@@ -24,15 +25,10 @@ public class LdapPrimaryConfiguration {
     @Bean(name="ldapTemplate")
     @Primary
     public LdapTemplate ldapTemplate(@Qualifier("contextSource") LdapContextSource source) {
-        source.setReferral("follow");
-        source.afterPropertiesSet();
         LdapTemplate ldapTemplate =  new LdapTemplate(source);
-        ldapTemplate.setIgnorePartialResultException(true);
         ldapTemplate.setDefaultSearchScope(2);
         ldapTemplate.setDefaultTimeLimit(0);
         ldapTemplate.setDefaultCountLimit(0);
-        ldapTemplate.setIgnoreNameNotFoundException(false);
-        ldapTemplate.setIgnoreSizeLimitExceededException(true);
         return ldapTemplate;
     }
 

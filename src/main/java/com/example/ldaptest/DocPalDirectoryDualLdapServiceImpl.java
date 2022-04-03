@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.query.LdapQuery;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,12 +18,6 @@ public class DocPalDirectoryDualLdapServiceImpl implements DirectoryListServiceI
     @Autowired
     @Qualifier("ldapTemplate2")
     private LdapTemplate ldapTemplatePRC;
-
-//    public List<Person> searchLdapUser(String keyword) {
-//        keyword = "*" + keyword + "*";
-//        LdapQuery query = query().where("sAMAccountName").like(keyword);
-//        return ldapTemplate.find(query, Person.class);
-//    }
 
     public List<UserDTO> searchAllLdapUserId() {
         LdapQuery query = query().where("objectClass").is("user").and("userAccountControl").not().is("66050");
@@ -57,48 +50,4 @@ public class DocPalDirectoryDualLdapServiceImpl implements DirectoryListServiceI
     public List<GroupDTO> searchAllLdapGroup() {
         return null;
     }
-
-//    public List<Group> searchAllLdapGroup() {
-//        LdapQuery query = query().where("objectClass").is("group");
-//        return ldapTemplate.find(query, Group.class);
-//    }
-//
-//    public List<Group> searchAllLdapGroupByDistinguishName(String name) {
-//        LdapQuery query = query().where("objectClass").is("group").and("member").is(name);
-//        return ldapTemplate.find(query, Group.class);
-//    }
-
-//    @Override
-//    public List<String> searchAllLdapGroupByLoginId(String name) {
-//        List<Person> personList = getPeople(name, ldapTemplate);
-//        if (personList.isEmpty()) {
-//            // search for PRC user
-//            personList = getPeople(name, ldapTemplatePRC);
-//            if (personList.isEmpty()) {
-//                return new ArrayList<>();   // Cannot find any person, return error
-//            } else {
-//                return getGroup(personList.get(0).getDistinguishedName(), ldapTemplatePRC);
-//            }
-//        } else {
-//            return getGroup(personList.get(0).getDistinguishedName(), ldapTemplate);
-//        }
-//    }
-//
-//    private List<String> getGroup(String distinguishedName, LdapTemplate ldapTemplate) {
-//        LdapQuery query = query().where("objectClass").is("group").and("member").is(distinguishedName);
-//        List<Group> groupList = ldapTemplate.find(query, Group.class);
-//        List<String> groupStringList = groupList.stream().map(p -> {
-//            return p.getGroupName();
-//        }).collect(Collectors.toList());
-//        return groupStringList;
-//    }
-//
-//    private List<Person> getPeople(String name, LdapTemplate ldapTemplatePRC) {
-//        LdapQuery query = query().where("objectClass").is("user").and("sAMAccountName").is(name);
-//        List<Person> personList = ldapTemplatePRC.find(query, Person.class);
-//        if (personList.isEmpty()) {
-//            return new ArrayList<>();
-//        }
-//        return personList;
-//    }
 }
