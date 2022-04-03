@@ -1,0 +1,14 @@
+#spring:
+#    ldap:
+#        urls: ldap://132.148.160.65:389/
+#        base: OU=HongKong,DC=weltronics,DC=com
+#        username: WELTRONICS\weltadmin
+#        password: ..waCr@3058
+##        template:
+##            ignore-partial-result-exception: true
+#app:
+#    ldap2:
+#        urls: ldap://192.168.5.105:389/
+#        base: OU=WCLPRC,DC=wclszo,DC=weltronics,DC=com
+#        username: WELTRONICS\weltadmin
+#        password: ..waCr@3058
